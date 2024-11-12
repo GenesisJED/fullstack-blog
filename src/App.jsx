@@ -1,13 +1,21 @@
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { Home, About, SignIn, SignUp, Dashboard } from './pages';
+import Projects from './pages/Projects';
 
-function App() {
-
+export default function App() {
   return (
-    <>
-      <h1 className='text-3xl text-red-500'>
-        Blog appn ggg
-      </h1>
-    </>
+    <BrowserRouter>
+      <Routes>
+        <Route path='/' element={ <Home /> }></Route>
+        <Route path='/about' element={ <About /> }></Route>
+        <Route path='/sign-in' element={ <SignIn /> }></Route>
+        <Route path='/sign-up' element={ <SignUp /> }></Route>
+        <Route path='/dashboard' element={ <Dashboard /> }></Route>
+        <Route path='/projects' element={ <Projects /> }></Route>
+      </Routes>
+    </BrowserRouter>
   )
 }
 
-export default App
+
+
