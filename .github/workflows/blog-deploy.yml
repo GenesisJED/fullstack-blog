@@ -1,0 +1,19 @@
+name: Blog deploy
+
+on: 
+  push:
+    branches:
+      -main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+      - name: Install package
+        run: npm ci
+      - name: Bundle
+        run: npm run build
