@@ -54,7 +54,7 @@ export const SignUp = () => {
             Blog
           </Link>
           <p className='text-sm mt-5'>
-            You can register using your email and password or sign in with Google.
+            You can register using your email and password or sign up with Google.
           </p>
         </div>
         {/* right */}
