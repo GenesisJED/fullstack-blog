@@ -1,16 +1,19 @@
 import { Button, TextInput } from 'flowbite-react';
+import { useState, useRef, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 
 export const DashProfile = () => {
     const { currentUser } = useSelector((state) => state.user);
-
+    const [ imageFileUrl, setImageFileUrl ] = useState(null);
+    const filePickerRef = useRef();
+    
   return (
     <div className='max-w-lg mx-auto p-3 w-full'>
     <h1 className='my-7 text-center font-semibold text-3xl'>Profile</h1>
     <form className='flex flex-col gap-4'>
-      <div className='w-32 h-32 self-center cursor-pointer shadow-md overflow-hidden rounded-full'>
+      <div className='w-32 h-32 self-center shadow-md overflow-hidden rounded-full'>
         <img
-          src={currentUser.profilePicture}
+          src={imageFileUrl || currentUser.profilePicture}
           alt='user'
           className='rounded-full w-full h-full object-cover border-8 border-[lightgray]'
         />
