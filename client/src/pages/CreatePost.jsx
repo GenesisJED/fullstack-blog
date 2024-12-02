@@ -4,16 +4,11 @@ import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import { CircularProgressbar } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
-import { createClient } from '@supabase/supabase-js';
 import { v4 as uuidv4 } from 'uuid';
-import { getEnvVariables } from '../helpers/getEnvVariables';
 import { useNavigate } from "react-router-dom";
+import { getImagesSupabase } from '../helpers/getImagesSupabase';
 
-const { VITE_APP_SUPABASE_URL, VITE_APP_ANON_KEY, VITE_APP_CDNURL } = getEnvVariables()
-
-
-const supabase = createClient(VITE_APP_SUPABASE_URL, VITE_APP_ANON_KEY);
-const CDNURL = VITE_APP_CDNURL;
+const { supabase, CDNURL } = getImagesSupabase();
 
 export const CreatePost = () => {
     const [file, setFile] = useState(null);
@@ -32,7 +27,6 @@ export const CreatePost = () => {
                 return;
             }
             setImageUploadError(null);
-            console.log('Upload!');
             const { error, data } = await supabase.storage
                 .from('images')
                 .upload(uuidv4() + ".png", file)
@@ -63,7 +57,7 @@ export const CreatePost = () => {
             }
 
             if (res.ok) {
-                console.log(data)
+                // console.log(data)
                 setPublishError(null);
                 navigate(`/post/${data.slug}`);
             }
