@@ -13,6 +13,7 @@ export const DashPosts = () => {
   const [userPosts, setUserPosts] = useState([]);
   const [showMore, setShowMore] = useState(true);
   const [showModal, setShowModal] = useState(false);
+  const [postIdToDelete, setPostIdToDelete] = useState('');
  
   useEffect(() => {
     const fetchPosts = async () => {
@@ -46,6 +47,28 @@ export const DashPosts = () => {
         if (data.posts.length < 9) {
           setShowMore(false);
         }
+      }
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+
+  const handleDeletePost = async () => {
+    setShowModal(false);
+    try {
+      const res = await fetch(
+        `/api/post/deletepost/${postIdToDelete}/${currentUser._id}`,
+        {
+          method: 'DELETE',
+        }
+      );
+      const data = await res.json();
+      if (!res.ok) {
+        console.log(data.message);
+      } else {
+        setUserPosts((prev) =>
+          prev.filter((post) => post._id !== postIdToDelete)
+        );
       }
     } catch (error) {
       console.log(error.message);
@@ -126,13 +149,13 @@ export const DashPosts = () => {
       ) : (
         <p>You have no posts yet!</p>
       )}
-      {/* <Modal
+     <Modal
         show={showModal}
         onClose={() => setShowModal(false)}
         popup
         size='md'
-      > */}
-        {/* <Modal.Header />
+      >
+        <Modal.Header />
         <Modal.Body>
           <div className='text-center'>
             <HiOutlineExclamationCircle className='h-14 w-14 text-gray-400 dark:text-gray-200 mb-4 mx-auto' />
@@ -149,7 +172,7 @@ export const DashPosts = () => {
             </div>
           </div>
         </Modal.Body>
-      </Modal> */}
+      </Modal>
     </div>
   )
 }
