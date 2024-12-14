@@ -3,7 +3,6 @@ import { useEffect, useState } from 'react';
 import { FaThumbsUp } from 'react-icons/fa';
 import { useSelector } from 'react-redux';
 import { Button, Textarea } from 'flowbite-react';
-import { set } from 'mongoose';
 
 export const Comment = ({ comment, onLike, onEdit, onDelete }) => {
   const [user, setUser] = useState({});
