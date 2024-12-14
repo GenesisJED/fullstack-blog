@@ -8,11 +8,13 @@
     "dev": "nodemon api/index.js",
     "start": "nodem api/index.js",
     "build": "npm install && npm install --prefix client && npm run build --prefix client"
-
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "engines": {
+    "node": ">=22.11.0 <23.0.0"
+  },
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "cookie-parser": "^1.4.7",
